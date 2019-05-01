@@ -19,7 +19,7 @@ interface Response{
 // Root page
 app.get('/', (req, res) => {
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
     let send:Response = {
       'msg': 'go to /token/new to get started',
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 // Redirected to here after requesting for new token
 app.get('/token', (req, res) => {
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
 
   let error = req.query.error
@@ -61,7 +61,7 @@ app.get('/token', (req, res) => {
       params: {
         'grant_type': "authorization_code",
         'code': code,
-        'redirect_uri': 'https://spotify-auth-renabil.herokuapp.com/'
+        'redirect_uri': '*'
       }
       
     })
@@ -85,7 +85,7 @@ app.get('/token', (req, res) => {
 // Refreshes the token (Not used as of now)
 app.get('/token/refresh', (req,res) => {
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
 
   // READ FROM FILE
@@ -128,7 +128,7 @@ app.get('/token/refresh', (req,res) => {
 // Redirected to here from /token
 app.get('/token/done', (req, res) => {
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
   let send = JSON.parse(req.query.response_data)
   res.send({data: send})
@@ -137,9 +137,9 @@ app.get('/token/done', (req, res) => {
 
 app.get('/token/new', (req, res) => {
 
-  res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/')
+  res.setHeader('Access-Control-Allow-Origin', '*')
 
-  let redirect_url:string = generateAuthUrl('3a89b22b7095445782078c237454dafd', 'https://spotify-auth-renabil.herokuapp.com/', 'user-read-currently-playing', false, 'code')
+  let redirect_url:string = generateAuthUrl('3a89b22b7095445782078c237454dafd', '*', 'user-read-currently-playing', false, 'code')
   res.redirect(redirect_url)
   
 })

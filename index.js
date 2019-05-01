@@ -6,7 +6,7 @@ var PORT = process.env.PORT || 4000;
 var app = express();
 // Root page
 app.get('/', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     var send = {
         'msg': 'go to /token/new to get started',
         'path': req.url,
@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
 });
 // Redirected to here after requesting for new token
 app.get('/token', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     var error = req.query.error;
     if (error) {
         var send = {
@@ -38,7 +38,7 @@ app.get('/token', function (req, res) {
             params: {
                 'grant_type': "authorization_code",
                 'code': code,
-                'redirect_uri': 'https://spotify-auth-renabil.herokuapp.com/'
+                'redirect_uri': '*'
             }
         })
             .then(function (r) {
@@ -54,7 +54,7 @@ app.get('/token', function (req, res) {
 });
 // Refreshes the token (Not used as of now)
 app.get('/token/refresh', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     // READ FROM FILE
     // let AUTH = JSON.parse(fs.readFileSync('./auth.json'))
     // console.log(AUTH.refresh_token)
@@ -84,13 +84,13 @@ app.get('/token/refresh', function (req, res) {
 });
 // Redirected to here from /token
 app.get('/token/done', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     var send = JSON.parse(req.query.response_data);
     res.send({ data: send });
 });
 app.get('/token/new', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://spotify-auth-renabil.herokuapp.com/');
-    var redirect_url = generateAuthUrl_1["default"]('3a89b22b7095445782078c237454dafd', 'https://spotify-auth-renabil.herokuapp.com/', 'user-read-currently-playing', false, 'code');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var redirect_url = generateAuthUrl_1["default"]('3a89b22b7095445782078c237454dafd', '*', 'user-read-currently-playing', false, 'code');
     res.redirect(redirect_url);
 });
 app.listen(PORT, function () {
