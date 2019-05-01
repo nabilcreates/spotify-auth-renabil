@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "allowUnusedLabels": false,
+        "target": "es3",
+    }
+}
