@@ -4,7 +4,7 @@ import { setInterval } from 'timers';
 let fs = require('fs')
 let axios = require('axios')
 
-let PORT = process.env.PORT | 4500
+let PORT = process.env.PORT || 4000
 
 let app = express();
 
@@ -20,7 +20,7 @@ interface Response{
 app.get('/', (req, res) => {
 
     let send:Response = {
-      'msg': 'go to /token.new to get started',
+      'msg': 'go to /token/new to get started',
       'path': req.url,
       'error': false,
     }

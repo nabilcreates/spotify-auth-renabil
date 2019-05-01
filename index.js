@@ -2,12 +2,12 @@ var express = require('express');
 var generateAuthUrl_1 = require('./lib/generateAuthUrl');
 var fs = require('fs');
 var axios = require('axios');
-var PORT = process.env.PORT | 4500;
+var PORT = process.env.PORT || 4000;
 var app = express();
 // Root page
 app.get('/', function (req, res) {
     var send = {
-        'msg': 'go to /token.new to get started',
+        'msg': 'go to /token/new to get started',
         'path': req.url,
         'error': false
     };
