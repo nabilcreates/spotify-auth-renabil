@@ -56,7 +56,7 @@ app.get('/token', (req, res) => {
       params: {
         'grant_type': "authorization_code",
         'code': code,
-        'redirect_uri': 'http://localhost:4500/token'
+        'redirect_uri': 'https://spotify-auth-renabil.herokuapp.com/'
       }
       
     })
@@ -126,7 +126,7 @@ app.get('/token/done', (req, res) => {
 
 app.get('/token/new', (req, res) => {
 
-  let redirect_url:string = generateAuthUrl('3a89b22b7095445782078c237454dafd', 'http://localhost:4500/token', 'user-read-currently-playing', false, 'code')
+  let redirect_url:string = generateAuthUrl('3a89b22b7095445782078c237454dafd', 'https://spotify-auth-renabil.herokuapp.com/', 'user-read-currently-playing', false, 'code')
 
   res.redirect(redirect_url)
   
