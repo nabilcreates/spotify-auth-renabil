@@ -4,7 +4,7 @@ var PORT = process.env.PORT || 4000;
 var app = express();
 // This is the middleware to allow any requests from all server (*)
 app.use(function (req, res, next) {
-    res.set('Access-Control-Allow-Origin', 'https://renabil.github.io/currentlyplaying/');
+    res.set('Access-Control-Allow-Origin', 'https://renabil.github.io');
     console.log(req.headers);
     // Calls next in the stack
     next();
