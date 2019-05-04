@@ -7,7 +7,7 @@ let app = express();
 
 // This is the middleware to allow any requests from all server (*)
 app.use((req,res,next) => {
-  res.set('Access-Control-Allow-Origin', '*')
+  res.set('Access-Control-Allow-Origin', 'https://renabil.github.io/currentlyplaying/')
   console.log(req.headers)
 
   // Calls next in the stack
@@ -52,11 +52,18 @@ app.get('/token/refresh', (req,res) => {
   })
   .then(r => {
 
-    console.log(r)
     let response_data = r.data;
-    res.send({
-      access_token: response_data.access_token
-    });
+
+    let send:Response = {
+      'msg': 'Got a token!',
+      'path': req.url,
+      'error': false,
+      'access_token': response_data.access_token
+    }
+
+
+    res.send(send);
+    
   })
   .catch(err => {
     console.log(err)

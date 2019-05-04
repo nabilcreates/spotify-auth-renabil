@@ -4,7 +4,7 @@ var PORT = process.env.PORT || 4000;
 var app = express();
 // This is the middleware to allow any requests from all server (*)
 app.use(function (req, res, next) {
-    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Origin', 'https://renabil.github.io/currentlyplaying/');
     console.log(req.headers);
     // Calls next in the stack
     next();
@@ -33,11 +33,14 @@ app.get('/token/refresh', function (req, res) {
         }
     })
         .then(function (r) {
-        console.log(r);
         var response_data = r.data;
-        res.send({
-            access_token: response_data.access_token
-        });
+        var send = {
+            'msg': 'Got a token!',
+            'path': req.url,
+            'error': false,
+            'access_token': response_data.access_token
+        };
+        res.send(send);
     })
         .catch(function (err) {
         console.log(err);
