@@ -1,1 +1,0 @@
-let basic_key:string = ''

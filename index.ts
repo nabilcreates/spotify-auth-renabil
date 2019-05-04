@@ -8,6 +8,12 @@ let PORT = process.env.PORT || 4000
 
 let app = express();
 
+app.use((req,res,next) => {
+  res.set('Access-Control-Allow-Origin', '*')
+  console.log(req.headers)
+  next()
+})
+
 // Interface for response sent back
 interface Response{
   'msg': string,
@@ -18,8 +24,6 @@ interface Response{
 
 // Root page
 app.get('/', (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', '*')
 
     let send:Response = {
       'msg': 'go to /token/new to get started',
@@ -32,10 +36,6 @@ app.get('/', (req, res) => {
 
 // Redirected to here after requesting for new token
 app.get('/token', (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', '*')
-
-
   let error = req.query.error
   if(error){
     let send:Response = {
@@ -84,10 +84,6 @@ app.get('/token', (req, res) => {
 
 // Refreshes the token (Not used as of now)
 app.get('/token/refresh', (req,res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', '*')
-
-
   // READ FROM FILE
   // let AUTH = JSON.parse(fs.readFileSync('./auth.json'))
   // console.log(AUTH.refresh_token)
@@ -127,18 +123,12 @@ app.get('/token/refresh', (req,res) => {
 
 // Redirected to here from /token
 app.get('/token/done', (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', '*')
-
   let send = JSON.parse(req.query.response_data)
   res.send({data: send})
 
 })
 
 app.get('/token/new', (req, res) => {
-
-  res.setHeader('Access-Control-Allow-Origin', '*')
-
   let redirect_url:string = generateAuthUrl('3a89b22b7095445782078c237454dafd', '*', 'user-read-currently-playing', false, 'code')
   res.redirect(redirect_url)
   
